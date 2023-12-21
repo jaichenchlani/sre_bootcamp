@@ -1,0 +1,15 @@
+project_id="codegarage-001-408013"
+zone="us-east1-b"
+machine_type="e2-medium"
+scopes="https://www.googleapis.com/auth/cloud-platform"
+debian_image="projects/debian-cloud/global/images/debian-11-bullseye-v20231212"
+ni_external_ip="network-tier=PREMIUM,subnet=default"  
+
+### Webserver Configuration Files Location
+webserver_config_files="gs://webserver-config-files-001"
+
+### VM Names
+vm_name="vm-debian1"
+
+### Startup Scripts
+vm_debian_startup_script="startup_script.sh"
