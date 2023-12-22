@@ -1,4 +1,35 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_GCP_MONITORING",
+      "label": "gcp_monitoring",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "stackdriver",
+      "pluginName": "Google Cloud Monitoring"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.3"
+    },
+    {
+      "type": "datasource",
+      "id": "stackdriver",
+      "name": "Google Cloud Monitoring",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -19,14 +50,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "stackdriver",
-        "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+        "uid": "${DS_GCP_MONITORING}"
       },
       "description": "Traffic from Logging Agent API Request Count",
       "fieldConfig": {
@@ -106,7 +137,7 @@
         {
           "datasource": {
             "type": "stackdriver",
-            "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+            "uid": "${DS_GCP_MONITORING}"
           },
           "queryType": "timeSeriesList",
           "refId": "A",
@@ -133,7 +164,7 @@
     {
       "datasource": {
         "type": "stackdriver",
-        "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+        "uid": "${DS_GCP_MONITORING}"
       },
       "description": "Traffic - Good and Bad requests based on Log Based Metrics",
       "fieldConfig": {
@@ -213,7 +244,7 @@
         {
           "datasource": {
             "type": "stackdriver",
-            "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+            "uid": "${DS_GCP_MONITORING}"
           },
           "queryType": "timeSeriesList",
           "refId": "A",
@@ -225,7 +256,9 @@
               "=",
               "logging.googleapis.com/user/gce_good_requests"
             ],
-            "groupBys": [],
+            "groupBys": [
+              "resource.label.instance_id"
+            ],
             "perSeriesAligner": "ALIGN_MEAN",
             "preprocessor": "rate",
             "projectName": "codegarage-001-408013"
@@ -234,7 +267,7 @@
         {
           "datasource": {
             "type": "stackdriver",
-            "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+            "uid": "${DS_GCP_MONITORING}"
           },
           "queryType": "timeSeriesList",
           "refId": "B",
@@ -259,7 +292,7 @@
     {
       "datasource": {
         "type": "stackdriver",
-        "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+        "uid": "${DS_GCP_MONITORING}"
       },
       "description": "CPU Utilization using Compute CPU Utilization metric",
       "fieldConfig": {
@@ -339,7 +372,7 @@
         {
           "datasource": {
             "type": "stackdriver",
-            "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+            "uid": "${DS_GCP_MONITORING}"
           },
           "queryType": "timeSeriesList",
           "refId": "A",
@@ -364,7 +397,7 @@
     {
       "datasource": {
         "type": "stackdriver",
-        "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+        "uid": "${DS_GCP_MONITORING}"
       },
       "description": "Latency chart based on Log based metrics",
       "fieldConfig": {
@@ -444,19 +477,21 @@
         {
           "datasource": {
             "type": "stackdriver",
-            "uid": "aa334b5e-b862-4a08-b8ad-efdc8844236e"
+            "uid": "${DS_GCP_MONITORING}"
           },
           "queryType": "timeSeriesList",
           "refId": "A",
           "timeSeriesList": {
             "alignmentPeriod": "grafana-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
+            "crossSeriesReducer": "REDUCE_PERCENTILE_95",
             "filters": [
               "metric.type",
               "=",
               "logging.googleapis.com/user/request_latency"
             ],
-            "groupBys": [],
+            "groupBys": [
+              "resource.label.instance_id"
+            ],
             "perSeriesAligner": "ALIGN_PERCENTILE_95",
             "preprocessor": "none",
             "projectName": "codegarage-001-408013"
@@ -474,13 +509,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "GCE Golden Signals",
   "uid": "e285d556-2c25-4cec-a101-3f47da75581d",
-  "version": 7,
+  "version": 4,
   "weekStart": ""
 }

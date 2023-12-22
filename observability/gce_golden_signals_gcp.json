@@ -1,0 +1,211 @@
+{
+    "dashboardFilters": [],
+    "displayName": "Golden Signals",
+    "labels": {},
+    "mosaicLayout": {
+      "columns": 48,
+      "tiles": [
+        {
+          "height": 16,
+          "widget": {
+            "title": "traffic_apache_default_metric",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"workload.googleapis.com/apache.requests\" resource.type=\"gce_instance\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "yAxis": {
+                "label": "",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "traffic_log_based_metrics",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"logging.googleapis.com/user/gce_good_requests\" resource.type=\"gce_instance\""
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y2",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"logging.googleapis.com/user/gce_bad_requests\" resource.type=\"gce_instance\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "y2Axis": {
+                "label": "",
+                "scale": "LINEAR"
+              },
+              "yAxis": {
+                "label": "",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "latency",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_MEAN",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_DELTA"
+                      },
+                      "filter": "metric.type=\"logging.googleapis.com/user/request_latency\" resource.type=\"gce_instance\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [
+                {
+                  "label": "",
+                  "targetAxis": "Y1",
+                  "value": 250
+                }
+              ],
+              "yAxis": {
+                "label": "",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24,
+          "yPos": 16
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "availability",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "legendTemplate": "Availability",
+                  "measures": [],
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilterRatio": {
+                      "denominator": {
+                        "aggregation": {
+                          "crossSeriesReducer": "REDUCE_SUM",
+                          "groupByFields": [],
+                          "perSeriesAligner": "ALIGN_RATE"
+                        },
+                        "filter": "metric.type=\"logging.googleapis.com/user/gce_requests_total\" resource.type=\"gce_instance\""
+                      },
+                      "numerator": {
+                        "aggregation": {
+                          "alignmentPeriod": "60s",
+                          "crossSeriesReducer": "REDUCE_SUM",
+                          "groupByFields": [],
+                          "perSeriesAligner": "ALIGN_RATE"
+                        },
+                        "filter": "metric.type=\"logging.googleapis.com/user/gce_good_requests\" resource.type=\"gce_instance\""
+                      }
+                    }
+                  }
+                }
+              ],
+              "thresholds": [
+                {
+                  "label": "",
+                  "targetAxis": "Y1",
+                  "value": 0.9
+                }
+              ],
+              "yAxis": {
+                "label": "",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "yPos": 16
+        }
+      ]
+    }
+  }

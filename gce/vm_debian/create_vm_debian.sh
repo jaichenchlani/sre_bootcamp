@@ -31,7 +31,7 @@ gcloud compute instances create $vm_name \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
-    --labels=provisioned_by=gcloud \
+    --labels=provisioned_by=gcloud,name=$vm_name \
     --reservation-affinity=any \
     --metadata-from-file startup-script="$startup_script"
 
