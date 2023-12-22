@@ -11,8 +11,8 @@ Platform Engineering Bootcamp - Code and Reference Material
     3. Grafana
 - Bash script that creates the VM using startup script
 
-## gke
-
 ## observability
-`gce_golden_signals_gcp` GCP Native Golden Signals Dashboard for GCE
-`gce_golden_signals_grafana` Grafana Golden Signals Dashboard for GCE
+**`gce_golden_signals_gcp`** GCP Native Golden Signals Dashboard for GCE  
+**`gce_golden_signals_grafana`** Grafana Golden Signals Dashboard for GCE  
+
+## gke
