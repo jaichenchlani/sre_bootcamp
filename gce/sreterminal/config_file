@@ -1,0 +1,15 @@
+project_id="codegarage-001-408013"
+region="us-east1"
+zone="us-east1-b"
+machine_type="e2-medium"
+scopes="https://www.googleapis.com/auth/cloud-platform"
+centos_image="projects/centos-cloud/global/images/centos-7-v20231212"
+debian_image="projects/debian-cloud/global/images/debian-11-bullseye-v20231212"
+network_interface="network-tier=PREMIUM,subnet=snet-control-plane,no-address"
+gsa="918294306826-compute@developer.gserviceaccount.com"
+
+### VM Names
+vm_name="sreterminal"
+
+### Startup Scripts
+sreterminal_startup_script="startup_script.sh"

@@ -1,0 +1,77 @@
+POST https://dev-compute.sandbox.googleapis.com/compute/beta/projects/codegarage-001-408013/global/backendServices
+{
+  "backends": [
+    {
+      "balancingMode": "UTILIZATION",
+      "capacityScaler": 1,
+      "group": "projects/codegarage-001-408013/regions/us-east1/instanceGroups/mig-debian",
+      "maxUtilization": 0.8
+    }
+  ],
+  "cdnPolicy": {
+    "cacheKeyPolicy": {
+      "includeHost": true,
+      "includeProtocol": true,
+      "includeQueryString": true
+    },
+    "cacheMode": "CACHE_ALL_STATIC",
+    "clientTtl": 3600,
+    "defaultTtl": 3600,
+    "maxTtl": 86400,
+    "negativeCaching": false,
+    "serveWhileStale": 0
+  },
+  "compressionMode": "DISABLED",
+  "connectionDraining": {
+    "drainingTimeoutSec": 300
+  },
+  "description": "Backend service for MIG Debian",
+  "enableCDN": true,
+  "healthChecks": [
+    "projects/codegarage-001-408013/global/healthChecks/apache-server"
+  ],
+  "loadBalancingScheme": "EXTERNAL_MANAGED",
+  "localityLbPolicy": "ROUND_ROBIN",
+  "logConfig": {
+    "enable": true,
+    "sampleRate": 1
+  },
+  "name": "backend-service-mig-debian",
+  "portName": "http",
+  "protocol": "HTTP",
+  "sessionAffinity": "NONE",
+  "timeoutSec": 30
+}
+
+POST https://compute.googleapis.com/compute/v1/projects/codegarage-001-408013/global/urlMaps
+{
+  "defaultService": "projects/codegarage-001-408013/global/backendServices/backend-service-mig-debian",
+  "name": "lb-debian"
+}
+
+POST https://compute.googleapis.com/compute/v1/projects/codegarage-001-408013/global/targetHttpProxies
+{
+  "name": "lb-debian-target-proxy",
+  "urlMap": "projects/codegarage-001-408013/global/urlMaps/lb-debian"
+}
+
+POST https://compute.googleapis.com/compute/v1/projects/codegarage-001-408013/global/forwardingRules
+{
+  "IPAddress": "projects/codegarage-001-408013/global/addresses/lb-debian-ip",
+  "IPProtocol": "TCP",
+  "loadBalancingScheme": "EXTERNAL_MANAGED",
+  "name": "http",
+  "networkTier": "PREMIUM",
+  "portRange": "80",
+  "target": "projects/codegarage-001-408013/global/targetHttpProxies/lb-debian-target-proxy"
+}
+
+POST https://dev-compute.sandbox.googleapis.com/compute/beta/projects/codegarage-001-408013/regions/us-east1/instanceGroups/mig-debian/setNamedPorts
+{
+  "namedPorts": [
+    {
+      "name": "http",
+      "port": 80
+    }
+  ]
+}

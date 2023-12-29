@@ -3,6 +3,7 @@
 # Comprehensive Startup Script for Apache Webserver running on Debian Image
 
 echo "START" | systemd-cat -t startup_script -p 4
+echo "https://everythingcloudplatform.com/" | systemd-cat -t startup_script -p 4
 
 ### Webserver Configuration Files Location
 config_files_location=""gs://webserver-config-files-001""
@@ -116,6 +117,18 @@ else
 	echo "Completed successfully." | systemd-cat -t startup_script -p 6
 fi
 
+# THIS STEP IS CURRENTLY NOT WORKING.. NEED TO FIGURE OUT A SOLUTION
+let "count++" # Increment the counter
+echo "$count) Modify Apache LogFormat to include response time..."  | systemd-cat -t startup_script -p 5
+str_from='LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined'
+str_to='LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" \"%D\"" combined'
+sudo sed -i[bak] "s/$str_from/$str_to/g" /etc/apache2/apache2.conf
+if [ $? -ne 0 ]; then
+    echo "Failed." | systemd-cat -t startup_script -p 3
+else
+	echo "Completed successfully." | systemd-cat -t startup_script -p 6
+fi
+
 echo "*******************" | systemd-cat -t startup_script -p 4
 echo "GRAFANA INSTALLATION" | systemd-cat -t startup_script -p 4
 echo "*******************" | systemd-cat -t startup_script -p 4
@@ -166,6 +179,7 @@ else
 	echo "Completed successfully." | systemd-cat -t startup_script -p 6
 fi
 
+# THIS STEP SHOWS UP AS FAILED IN JOURNALCTL.. NO IMPACT THOUGH.. FIGURE OUT...
 let "count++" # Increment the counter
 echo "$count) Update the list of available packages..."  | systemd-cat -t startup_script -p 5
 sudo apt-get update
@@ -220,4 +234,5 @@ else
 	echo "Completed successfully." | systemd-cat -t startup_script -p 6
 fi
 
+echo "https://everythingcloudplatform.com/" | systemd-cat -t startup_script -p 4
 echo "END" | systemd-cat -t startup_script -p 4

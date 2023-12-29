@@ -1,15 +1,33 @@
 project_id="codegarage-001-408013"
+region="us-east1"
 zone="us-east1-b"
 machine_type="e2-medium"
 scopes="https://www.googleapis.com/auth/cloud-platform"
 debian_image="projects/debian-cloud/global/images/debian-11-bullseye-v20231212"
-ni_external_ip="network-tier=PREMIUM,subnet=default"  
+network_interface="network-tier=PREMIUM,subnet=default,no-address"
+gsa="918294306826-compute@developer.gserviceaccount.com"
 
 ### Webserver Configuration Files Location
 webserver_config_files="gs://webserver-config-files-001"
 
 ### VM Names
-vm_name="vm-debian-auto"
+vm_name="vm-test"
+vm_template_name="vm-debian-instance-template"
 
 ### Startup Scripts
 vm_debian_startup_script="startup_script.sh"
+
+### Health Checks
+health_check_apache="apache-server"
+port_apache=80
+description_apache="Apache Server Health Check"
+check_interval_apache=10
+timeout_apache=5
+unhealthy_threshold_apache=2
+healthy_threshold_apache=2
+
+### Managed Instance Group (MIG)
+mig_debian="mig-debian"
+mig_debian_health_check="projects/codegarage-001-408013/global/healthChecks/apache-server"
+mig_debian_size=2
+mig_debian_template="projects/codegarage-001-408013/global/instanceTemplates/vm-debian-instance-template"

@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mathfunctions
+    env: dev
+    package: manual
+    provisioned_by: cli
+  name: mathfunctions
+  namespace: ecp
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: mathfunctions
+    env: dev
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mathfunctions
+    env: dev
+    package: manual
+    provisioned_by: cli
+  name: mathfunctions
+  namespace: ecp
+spec:
+  selector:
+    matchLabels:
+      app: mathfunctions
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: mathfunctions
+        env: dev
+        package: manual
+        provisioned_by: cli
+    spec:
+      containers:
+        - name: mathfunctions
+          image: docker.io/jaichenchlani/mathfunctions:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          resources:
+            limits:
+              cpu: 10m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+---
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  labels:
+    app: mathfunctions
+    env: dev
+    package: manual
+    provisioned_by: cli
+  name: mathfunctions
+  namespace: ecp
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  - interval: 10s
+    path: /stats/prometheus
+    port: 15020
+    scheme: http
+  selector:
+    matchLabels:
+      app: mathfunctions
+      env: dev

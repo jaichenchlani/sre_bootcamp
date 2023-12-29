@@ -1,0 +1,32 @@
+module "compute_instance" {
+  source                      = "../../../terraform_modules/compute_engine"
+  project_id                  = var.project_id
+  for_each                    = { for eachInstance in var.instances : eachInstance.instance_name => eachInstance }
+  machine_type                = each.value.instance_machine_type
+  name                        = each.value.instance_name
+  zone                        = each.value.instance_zone
+  description                 = each.value.instance_description
+  network_interface           = each.value.instance_network_interface
+  boot_disk                   = each.value.instance_boot_disk
+  allow_stopping_for_update   = each.value.instance_allow_stopping_for_update
+  can_ip_forward              = each.value.instance_can_ip_forward
+  desired_status              = each.value.instance_desired_status
+  deletion_protection         = each.value.instance_deletion_protection
+  hostname                    = each.value.instance_hostname
+  labels                      = each.value.instance_labels
+  metadata                    = each.value.instance_metadata
+  metadata_startup_script     = file(each.value.instance_metadata_startup_script)
+  min_cpu_platform            = each.value.instance_min_cpu_platform
+  tags                        = each.value.instance_tags
+  enable_display              = each.value.instance_enable_display
+  resource_policies           = each.value.instance_resource_policies
+  attached_disk               = each.value.instance_attached_disk
+  guest_accelerator           = each.value.instance_guest_accelerator
+  scheduling                  = each.value.instance_scheduling
+  scratch_disk_interface      = each.value.instance_scratch_disk_interface
+  service_account             = each.value.instance_service_account
+  shielded_instance_config    = each.value.instance_shielded_instance_config
+  reservation_affinity        = each.value.instance_reservation_affinity
+  enable_confidential_compute = each.value.instance_enable_confidential_compute
+  advanced_machine_features   = each.value.instance_advanced_machine_features
+}

@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: numberwiki
+    env: dev
+    package: manual
+    provisioned_by: cli
+  name: numberwiki
+  namespace: ecp
+spec:
+  ports:
+  - port: 80
+    targetPort: 8081
+  selector:
+    app: numberwiki
+    env: dev
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: numberwiki
+    env: dev
+    package: manual
+    provisioned_by: cli
+  name: numberwiki
+  namespace: ecp
+spec:
+  selector:
+    matchLabels:
+      app: numberwiki
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: numberwiki
+        env: dev
+        package: manual
+        provisioned_by: cli
+    spec:
+      containers:
+        - name: numberwiki
+          image: docker.io/jaichenchlani/numberwiki:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: PORT
+              value: "8081"
+            - name: MATHFUNCTIONS_API
+              value: http://mathfunctions.ecp.svc.cluster.local
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 32Mi
+---
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  labels:
+    app: numberwiki
+    env: dev
+    package: manual
+    provisioned_by: cli
+  name: numberwiki
+  namespace: ecp
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  - interval: 10s
+    path: /stats/prometheus
+    port: 15020
+    scheme: http
+  selector:
+    matchLabels:
+      app: numberwiki
+      env: dev

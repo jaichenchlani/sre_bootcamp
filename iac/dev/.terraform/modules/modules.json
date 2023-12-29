@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"compute_engine","Source":"../../../terraform_modules/instance","Dir":"../../../terraform_modules/instance"},{"Key":"compute_instance","Source":"../../../terraform_modules/compute_engine","Dir":"../../../terraform_modules/compute_engine"}]}

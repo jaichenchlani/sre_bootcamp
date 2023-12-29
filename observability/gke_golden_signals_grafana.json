@@ -1,0 +1,1904 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "After selecting your namespace and container you get a wealth of metrics like request rate, error rate, response times, pod count, cpu and memory usage. You can view cpu and memory usage in a variety of ways, compared to the limit, compared to the request, per pod, average per pod, etc.",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": 1471,
+    "graphTooltip": 1,
+    "id": 1,
+    "iteration": 1677180506195,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 37,
+        "panels": [],
+        "title": "Size",
+        "type": "row"
+      },
+      {
+        "datasource": "Google Cloud Monitoring",
+        "description": "Number of Nodes",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        "id": 29,
+        "interval": null,
+        "links": [],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "metricQuery": {
+              "aliasBy": "",
+              "alignmentPeriod": "cloud-monitoring-auto",
+              "crossSeriesReducer": "REDUCE_SUM",
+              "editorMode": "visual",
+              "filters": [],
+              "groupBys": [],
+              "metricKind": "GAUGE",
+              "metricType": "compute.googleapis.com/guest/cpu/load_15m",
+              "perSeriesAligner": "ALIGN_COUNT",
+              "preprocessor": "none",
+              "projectName": "codegarage-377302",
+              "query": "",
+              "valueType": "DOUBLE"
+            },
+            "queryType": "metrics",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Nodes",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Value"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": "Prometheus",
+        "description": "Number of Namespaces",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        "id": 26,
+        "interval": null,
+        "links": [],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "count(count(last_over_time(istio_requests_total[1d])) by (destination_workload_namespace))",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Namespaces",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Value"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": "Prometheus",
+        "description": "Number of Apps",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 12,
+          "y": 1
+        },
+        "id": 27,
+        "interval": null,
+        "links": [],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "count(count(last_over_time(istio_requests_total[1d])) by (destination_workload))",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Apps",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Value"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": "Prometheus",
+        "description": "Number of Pods",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 18,
+          "y": 1
+        },
+        "id": 28,
+        "interval": null,
+        "links": [],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "count(count(last_over_time(istio_requests_total[1d])) by (pod))",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Pods",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Value"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 39,
+        "panels": [],
+        "title": "Traffic",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "Prometheus",
+        "editable": true,
+        "error": false,
+        "fill": 1,
+        "fillGradient": 0,
+        "grid": {},
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 5
+        },
+        "hiddenSeries": false,
+        "id": 3,
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": false,
+          "max": true,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "sort": "avg",
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "nullPointMode": "connected",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "8.2.0",
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(irate(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}[1m])) by (destination_workload_namespace,destination_workload)",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "native | {{destination_workload}}",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Request rate",
+        "tooltip": {
+          "msResolution": true,
+          "shared": false,
+          "sort": 0,
+          "value_type": "cumulative"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:532",
+            "format": "ops",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:533",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "Prometheus",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 5
+        },
+        "hiddenSeries": false,
+        "id": 15,
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": false,
+          "max": true,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "sort": "avg",
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "nullPointMode": "connected",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "8.2.0",
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(irate(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\",response_code=~\"^[3-5][0-9]+\"}[1m])) by (destination_workload_namespace,destination_workload) / sum(irate(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}[1m])) by (destination_workload_namespace,destination_workload)",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "{{destination_workload}}",
+            "refId": "A",
+            "step": 20
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Error rate",
+        "tooltip": {
+          "shared": false,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:155",
+            "format": "percentunit",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:156",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 11
+        },
+        "id": 41,
+        "panels": [],
+        "title": "Availability",
+        "type": "row"
+      },
+      {
+        "datasource": "Prometheus",
+        "description": "HTTP Status Code distribution",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 12
+        },
+        "id": 24,
+        "links": [],
+        "options": {
+          "displayLabels": [
+            "name",
+            "percent"
+          ],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "pluginVersion": "7.5.9",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(irate(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}[1m])) by (response_code)",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "{{response_code}}",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Availability",
+        "type": "piechart"
+      },
+      {
+        "datasource": "Prometheus",
+        "description": "HTTP Status Code distribution",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": null,
+              "displayMode": "auto",
+              "filterable": true
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 7,
+          "x": 8,
+          "y": 12
+        },
+        "id": 25,
+        "interval": null,
+        "links": [],
+        "options": {
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "Value"
+            }
+          ]
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\",response_code=~\"^[3-5][0-9]+\"}) by (destination_workload,response_code)",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Errors",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "desc": true,
+                  "field": "Value"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 99.9
+                },
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 99
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 9,
+          "x": 15,
+          "y": 12
+        },
+        "id": 31,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\",response_code=~\"^[2][0-9]+\"}) / sum(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}) * 100",
+            "interval": "10s",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "title": "Availability",
+        "type": "gauge"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 15,
+          "y": 17
+        },
+        "id": 33,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\",response_code=~\"^[2][0-9]+\"})",
+            "interval": "10s",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "title": "Good Requests",
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 18,
+          "y": 17
+        },
+        "id": 42,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\",response_code=~\"^[3-5][0-9]+\"})",
+            "interval": "10s",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "title": "Bad Requests",
+        "type": "stat"
+      },
+      {
+        "cacheTimeout": null,
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
+          "x": 21,
+          "y": 17
+        },
+        "id": 35,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.2.0",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "sum(istio_requests_total{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"})",
+            "interval": "10s",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          }
+        ],
+        "title": "Total Requests",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 20
+        },
+        "id": 17,
+        "panels": [],
+        "repeat": null,
+        "title": "Response time",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "Prometheus",
+        "editable": true,
+        "error": false,
+        "fill": 1,
+        "fillGradient": 0,
+        "grid": {},
+        "gridPos": {
+          "h": 6,
+          "w": 24,
+          "x": 0,
+          "y": 21
+        },
+        "hiddenSeries": false,
+        "id": 5,
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": false,
+          "max": true,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "sort": "max",
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "nullPointMode": "connected",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "8.2.0",
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}[30s])) by (app,kubernetes_namespace,le))",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "99th Percentile",
+            "refId": "A",
+            "step": 1
+          },
+          {
+            "exemplar": true,
+            "expr": "histogram_quantile(0.90, sum(rate(istio_request_duration_milliseconds_bucket{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}[30s])) by (app,kubernetes_namespace,le))",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "90th Percentile",
+            "refId": "B",
+            "step": 1
+          },
+          {
+            "exemplar": true,
+            "expr": "histogram_quantile(0.5, sum(rate(istio_request_duration_milliseconds_bucket{destination_workload_namespace=~\"^$namespace$\", destination_workload=~\"^$app$\", pod=~\"^$pod$\"}[30s])) by (app,kubernetes_namespace,le))",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "50th Percentile",
+            "refId": "C",
+            "step": 1
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Response time percentiles",
+        "tooltip": {
+          "msResolution": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "cumulative"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:637",
+            "format": "s",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:638",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": true,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 27
+        },
+        "id": 18,
+        "panels": [],
+        "title": "Saturation",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "${datasource}",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 28
+        },
+        "hiddenSeries": false,
+        "id": 44,
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": false
+        },
+        "percentage": false,
+        "pluginVersion": "8.2.0",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "metricQuery": {
+              "aliasBy": "{{metric.label.instance_name}}",
+              "alignmentPeriod": "$alignmentPeriod",
+              "crossSeriesReducer": "REDUCE_MEAN",
+              "editorMode": "visual",
+              "filters": [
+                "resource.type",
+                "=",
+                "gce_instance"
+              ],
+              "groupBys": [
+                "metric.label.instance_name"
+              ],
+              "metricKind": "GAUGE",
+              "metricType": "compute.googleapis.com/instance/cpu/utilization",
+              "perSeriesAligner": "ALIGN_MAX",
+              "preprocessor": "none",
+              "projectName": "$project",
+              "query": "",
+              "valueType": "DOUBLE"
+            },
+            "queryType": "metrics",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "CPU Utilization by Node",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:146",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:147",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "datasource": "${datasource}",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "right",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "reqps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 28
+        },
+        "id": 46,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        },
+        "targets": [
+          {
+            "metricQuery": {
+              "aliasBy": "{{metric.label.destination_workload_name}}",
+              "alignmentPeriod": "cloud-monitoring-auto",
+              "crossSeriesReducer": "REDUCE_MEAN",
+              "editorMode": "visual",
+              "filters": [],
+              "groupBys": [
+                "metric.label.destination_workload_name"
+              ],
+              "metricKind": "DELTA",
+              "metricType": "istio.io/service/client/request_count",
+              "perSeriesAligner": "ALIGN_MEAN",
+              "preprocessor": "rate",
+              "projectName": "$project",
+              "query": "",
+              "valueType": "INT64"
+            },
+            "queryType": "metrics",
+            "refId": "A"
+          }
+        ],
+        "title": "Traffic by App",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "id": 19,
+        "panels": [],
+        "repeat": null,
+        "title": "Usage relative to request",
+        "type": "row"
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 31,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "Google Cloud Monitoring",
+            "value": "Google Cloud Monitoring"
+          },
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "Datasource",
+          "multi": false,
+          "name": "datasource",
+          "options": [],
+          "query": "stackdriver",
+          "queryValue": "",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "codegarage-377302",
+            "value": "codegarage-377302"
+          },
+          "datasource": "${datasource}",
+          "definition": "",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "Project",
+          "multi": false,
+          "name": "project",
+          "options": [],
+          "query": {
+            "labelKey": "",
+            "loading": false,
+            "projectName": "codegarage-377302",
+            "projects": [
+              {
+                "label": "codegarage-377302",
+                "value": "codegarage-377302"
+              }
+            ],
+            "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+            "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/frame_display_rates",
+            "selectedQueryType": "projects",
+            "selectedSLOService": "",
+            "selectedService": "actions.googleapis.com",
+            "sloServices": [
+              {
+                "label": "istio-ingressgateway",
+                "value": "canonical-ist:proj-900805129434-ingress-space-istio-ingressgateway"
+              },
+              {
+                "label": "mathfunctions-api",
+                "value": "canonical-ist:proj-900805129434-mathgarage-mathfunctions-api"
+              },
+              {
+                "label": "numberwiki-api",
+                "value": "canonical-ist:proj-900805129434-mathgarage-numberwiki-api"
+              },
+              {
+                "label": "grafana",
+                "value": "canonical-ist:proj-900805129434-monitoring-grafana"
+              },
+              {
+                "label": "prometheus",
+                "value": "canonical-ist:proj-900805129434-monitoring-prometheus"
+              },
+              {
+                "label": "add-api",
+                "value": "canonical-ist:proj-900805129434-sample-add-api"
+              },
+              {
+                "label": "gke-template",
+                "value": "canonical-ist:proj-900805129434-sample-gke-template"
+              },
+              {
+                "label": "hello-world-api",
+                "value": "canonical-ist:proj-900805129434-sample-hello-world-api"
+              },
+              {
+                "label": "multiply-api",
+                "value": "canonical-ist:proj-900805129434-sample-multiply-api"
+              }
+            ]
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "allValue": "",
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": "Google Cloud Monitoring",
+          "definition": "label_values(machine_memory_bytes, node)",
+          "description": "Kubernetes Node",
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": "Node",
+          "multi": true,
+          "name": "node",
+          "options": [],
+          "query": {
+            "labelKey": "metric.label.instance_name",
+            "loading": false,
+            "projectName": "codegarage-377302",
+            "projects": [
+              {
+                "label": "codegarage-377302",
+                "value": "codegarage-377302"
+              }
+            ],
+            "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+            "selectedMetricType": "compute.googleapis.com/guest/cpu/load_15m",
+            "selectedQueryType": "labelValues",
+            "selectedSLOService": "",
+            "selectedService": "compute.googleapis.com",
+            "sloServices": [
+              {
+                "label": "istio-ingressgateway",
+                "value": "canonical-ist:proj-900805129434-ingress-space-istio-ingressgateway"
+              },
+              {
+                "label": "mathfunctions-api",
+                "value": "canonical-ist:proj-900805129434-mathgarage-mathfunctions-api"
+              },
+              {
+                "label": "numberwiki-api",
+                "value": "canonical-ist:proj-900805129434-mathgarage-numberwiki-api"
+              },
+              {
+                "label": "grafana",
+                "value": "canonical-ist:proj-900805129434-monitoring-grafana"
+              },
+              {
+                "label": "prometheus",
+                "value": "canonical-ist:proj-900805129434-monitoring-prometheus"
+              },
+              {
+                "label": "add-api",
+                "value": "canonical-ist:proj-900805129434-sample-add-api"
+              },
+              {
+                "label": "gke-template",
+                "value": "canonical-ist:proj-900805129434-sample-gke-template"
+              },
+              {
+                "label": "hello-world-api",
+                "value": "canonical-ist:proj-900805129434-sample-hello-world-api"
+              },
+              {
+                "label": "multiply-api",
+                "value": "canonical-ist:proj-900805129434-sample-multiply-api"
+              }
+            ]
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": null,
+          "tagsQuery": null,
+          "type": "query"
+        },
+        {
+          "allValue": "",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "Prometheus",
+          "definition": "label_values(istio_requests_total, namespace)",
+          "description": "Kubernetes Namespace",
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": "Namespace",
+          "multi": false,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(istio_requests_total, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": null,
+          "tagsQuery": null,
+          "type": "query"
+        },
+        {
+          "allValue": "",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "Prometheus",
+          "definition": "label_values(istio_requests_total, pod)",
+          "description": "Kubernetes Pod",
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": "Pod",
+          "multi": false,
+          "name": "pod",
+          "options": [],
+          "query": {
+            "query": "label_values(istio_requests_total, pod)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": null,
+          "tagsQuery": null,
+          "type": "query"
+        },
+        {
+          "allValue": "",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "Prometheus",
+          "definition": "label_values(istio_requests_total, destination_workload)",
+          "description": "Kubernetes App(workload)",
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": "App",
+          "multi": false,
+          "name": "app",
+          "options": [],
+          "query": {
+            "query": "label_values(istio_requests_total, destination_workload)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": null,
+          "tagsQuery": null,
+          "type": "query"
+        },
+        {
+          "datasource": "Prometheus",
+          "description": null,
+          "error": null,
+          "filters": [],
+          "hide": 0,
+          "label": null,
+          "name": "Filters",
+          "skipUrlSync": false,
+          "type": "adhoc"
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "grafana auto",
+            "value": "grafana-auto"
+          },
+          "datasource": "${datasource}",
+          "definition": "",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "Alignment Period",
+          "multi": false,
+          "name": "alignmentPeriod",
+          "options": [],
+          "query": {
+            "labelKey": "",
+            "loading": false,
+            "projectName": "codegarage-377302",
+            "projects": [
+              {
+                "label": "codegarage-377302",
+                "value": "codegarage-377302"
+              }
+            ],
+            "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+            "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/frame_display_rates",
+            "selectedQueryType": "alignmentPeriods",
+            "selectedSLOService": "",
+            "selectedService": "actions.googleapis.com",
+            "sloServices": [
+              {
+                "label": "istio-ingressgateway",
+                "value": "canonical-ist:proj-900805129434-ingress-space-istio-ingressgateway"
+              },
+              {
+                "label": "mathfunctions-api",
+                "value": "canonical-ist:proj-900805129434-mathgarage-mathfunctions-api"
+              },
+              {
+                "label": "numberwiki-api",
+                "value": "canonical-ist:proj-900805129434-mathgarage-numberwiki-api"
+              },
+              {
+                "label": "grafana",
+                "value": "canonical-ist:proj-900805129434-monitoring-grafana"
+              },
+              {
+                "label": "prometheus",
+                "value": "canonical-ist:proj-900805129434-monitoring-prometheus"
+              },
+              {
+                "label": "add-api",
+                "value": "canonical-ist:proj-900805129434-sample-add-api"
+              },
+              {
+                "label": "gke-template",
+                "value": "canonical-ist:proj-900805129434-sample-gke-template"
+              },
+              {
+                "label": "hello-world-api",
+                "value": "canonical-ist:proj-900805129434-sample-hello-world-api"
+              },
+              {
+                "label": "multiply-api",
+                "value": "canonical-ist:proj-900805129434-sample-multiply-api"
+              }
+            ]
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "GKE App Metrics",
+    "uid": "l7yFeVi4z",
+    "version": 10
+  }
