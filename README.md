@@ -12,7 +12,12 @@ Platform Engineering Bootcamp - Code and Reference Material
 - Bash script that creates the VM using startup script
 
 ## observability
-**`gce_golden_signals_gcp`** __GCP Native__ Golden Signals Dashboard for GCE  
-**`gce_golden_signals_grafana`** __Grafana__ Golden Signals Dashboard for GCE  
+Golden Signal Dashboards for both GCP native and Grafana for apps running in:
+1. GCE
+2. GKE
+3. Cloud Run
 
 ## gke
+- numberwiki
+- mathfunctions
+Apps deployed in namespace `ecp` in GKE Auto cluster.

@@ -1,0 +1,231 @@
+{
+    "dashboardFilters": [],
+    "displayName": "Golden Signals | GKE",
+    "labels": {},
+    "mosaicLayout": {
+      "columns": 48,
+      "tiles": [
+        {
+          "height": 16,
+          "widget": {
+            "title": "Traffic by App",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [
+                          "metric.label.\"destination_workload\""
+                        ],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"prometheus.googleapis.com/istio_requests_total/counter\" resource.type=\"prometheus_target\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "yAxis": {
+                "label": "",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Traffic | Good vs Bad Requests",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "legendTemplate": "good_requests",
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"prometheus.googleapis.com/istio_requests_total/counter\" resource.type=\"prometheus_target\" metric.label.\"response_code\"=\"200\""
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "legendTemplate": "bad_requests",
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"prometheus.googleapis.com/istio_requests_total/counter\" resource.type=\"prometheus_target\" metric.label.\"response_code\"!=\"200\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "yAxis": {
+                "label": "requests/second",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Availability | GKE",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "legendTemplate": "availability",
+                  "measures": [],
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilterRatio": {
+                      "denominator": {
+                        "aggregation": {
+                          "crossSeriesReducer": "REDUCE_SUM",
+                          "groupByFields": [],
+                          "perSeriesAligner": "ALIGN_RATE"
+                        },
+                        "filter": "metric.type=\"prometheus.googleapis.com/istio_requests_total/counter\" resource.type=\"prometheus_target\""
+                      },
+                      "numerator": {
+                        "aggregation": {
+                          "alignmentPeriod": "60s",
+                          "crossSeriesReducer": "REDUCE_SUM",
+                          "groupByFields": [],
+                          "perSeriesAligner": "ALIGN_RATE"
+                        },
+                        "filter": "metric.type=\"prometheus.googleapis.com/istio_requests_total/counter\" resource.type=\"prometheus_target\" metric.label.\"response_code\"=\"200\""
+                      }
+                    }
+                  }
+                },
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "legendTemplate": "traffic",
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y2",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [],
+                        "perSeriesAligner": "ALIGN_RATE"
+                      },
+                      "filter": "metric.type=\"prometheus.googleapis.com/istio_requests_total/counter\" resource.type=\"prometheus_target\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [
+                {
+                  "label": "",
+                  "targetAxis": "Y1",
+                  "value": 0.99
+                }
+              ],
+              "y2Axis": {
+                "label": "requests/second",
+                "scale": "LINEAR"
+              },
+              "yAxis": {
+                "label": "availability",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "yPos": 16
+        },
+        {
+          "height": 16,
+          "widget": {
+            "title": "Latency by App",
+            "xyChart": {
+              "chartOptions": {
+                "mode": "COLOR"
+              },
+              "dataSets": [
+                {
+                  "breakdowns": [],
+                  "dimensions": [],
+                  "measures": [],
+                  "minAlignmentPeriod": "60s",
+                  "plotType": "LINE",
+                  "targetAxis": "Y1",
+                  "timeSeriesQuery": {
+                    "timeSeriesFilter": {
+                      "aggregation": {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_PERCENTILE_95",
+                        "groupByFields": [
+                          "metric.label.\"destination_workload_name\""
+                        ],
+                        "perSeriesAligner": "ALIGN_DELTA"
+                      },
+                      "filter": "metric.type=\"istio.io/service/server/response_latencies\" resource.type=\"k8s_container\""
+                    }
+                  }
+                }
+              ],
+              "thresholds": [],
+              "yAxis": {
+                "label": "latency",
+                "scale": "LINEAR"
+              }
+            }
+          },
+          "width": 24,
+          "xPos": 24,
+          "yPos": 16
+        }
+      ]
+    }
+  }
