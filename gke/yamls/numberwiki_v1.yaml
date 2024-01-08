@@ -28,6 +28,7 @@ metadata:
   name: numberwiki
   namespace: ecp
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: numberwiki
